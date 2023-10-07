@@ -1,0 +1,61 @@
+<?php 
+session_start();
+if (isset($_SESSION['count'])) {
+   $_SESSION['count']++;}
+
+$title="MonProfil";
+$nav="monprofil";
+require_once "header.php";?>
+
+
+<?php
+if (!is_connected()) :
+   header('location: /MonSite/login.php');
+endif;
+
+?>
+
+<div align="center">
+<h1>Bienvenu <?php echo $_SESSION['prenom']; ?> sur votre Profil</h1>
+</div>
+<div align="center">
+<img src="calculator.jpg" width="150px" height="150px">
+</div>
+
+
+<?php if(isset($_SESSION['addition'])):?>
+ <h3> Votre dernière addition faite, est <?php echo $_SESSION['nombre1'];
+ ?>  additione avec  <?php echo $_SESSION['nombre2']; ?> 
+ donne <?php echo $_SESSION['addition']; ?> </h3>
+<?php endif; ?>
+
+
+<?php if(isset($_SESSION['multiplication'])): ?>
+ <h3> Votre dernière multiplication faite, est <?php echo $_SESSION['nombre3'];
+ ?>  multiplie  par <?php echo $_SESSION['nombre4']; ?> 
+ donne <?php echo $_SESSION['multiplication']; ?> </h3>
+<?php endif ; ?>
+
+
+
+<?php if(isset($_SESSION['division'])): ?>
+ <h3> Votre dernière division  faite, est <?php echo $_SESSION['nombre5'];
+ ?>  divise par   <?php echo $_SESSION['nombre6']; ?> 
+ donne <?php echo $_SESSION['division']; ?> </h3>
+<?php endif; ?>
+
+
+
+<?php if(isset($_SESSION['soustraction'])): ?>
+ <h3> Votre dernière soustraction faite, est <?php echo $_SESSION['nombre7'];
+ ?>mois   <?php echo $_SESSION['nombre8']; ?> 
+ donne <?php echo $_SESSION['soustraction']; ?> </h3>
+<?php endif ;?>
+
+<?php
+
+echo "Vous avez fait ".$_SESSION['count']." opérations mathématiques.";
+?>
+
+<?php require_once "footer.php"
+?>

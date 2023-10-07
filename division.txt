@@ -1,0 +1,22 @@
+<?php
+    if (isset($_POST['nombre5']) && isset($_POST['nombre6'])) :{
+        if (empty($_POST['nombre5'])  || empty($_POST['nombre6'])) : ?>
+            Introduiser un chiffre.
+            <?php  if($_POST['nombre5']==0 || $_POST['nombre6']==0): ?>
+                Vous ne pouvez pas faire une division par 0.
+                <?php endif ;?> 
+            <?php else:  $division=division($_POST['nombre5'],$_POST['nombre6']); ?>
+            <?php $_SESSION['division']=$division;?>
+        
+            <?php endif;
+    $nombre5=$_POST['nombre5'];
+    $nombre6=$_POST['nombre6'];
+    $division=division($_POST['nombre5'],$_POST['nombre6']); 
+ 
+    $_SESSION['nombre5'] = $nombre5;
+    $_SESSION['nombre6'] = $nombre6;
+    $_SESSION['division'] = $division;
+    
+}
+ 
+ endif ;?>

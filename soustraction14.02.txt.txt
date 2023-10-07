@@ -1,0 +1,43 @@
+<?php 
+session_start();
+if (!isset($_SESSION['count'])) {
+  $_SESSION['count'] = 0;}
+$title="Soustraction";
+$nav="soustraction";
+require_once "header.php";
+?>
+<?php
+// if (!is_connected()) :
+//    header('location: /MonSite/login.php');
+// endif;
+
+?>
+<?php
+if (isset($_POST['nombre7']) && isset($_POST['nombre8'])) :{
+    $nombre7=$_POST['nombre7'];
+    $nombre8=$_POST['nombre8'];
+    $soustraction=soustraction($_POST['nombre7'],$_POST['nombre8']); 
+  $_SESSION['count']++; 
+    $_SESSION['nombre7'] = $nombre7;
+    $_SESSION['nombre8'] = $nombre8;
+    $_SESSION['soustraction'] = $soustraction;
+    
+}
+ 
+ endif ;?>
+<?php $_SESSION['count']++; ?>
+<div align="center">
+<h1>Soustraction</h1>
+
+<form action="/MONSITE/soustraction.php" method="POST">
+    <input type="number" name="nombre7" placeholder="Entre le 1er nombre" value="<?=(isset($_POST['nombre7']) ? $_POST['nombre7'] : '')?>"><br>
+  <div><img src="minus.png"></div>
+    <input type="number" name="nombre8" placeholder="Entre le 2em nombre" value="<?=(isset($_POST['nombre8']) ? $_POST['nombre8'] : '')?>"><br>
+    <div><img src="egal.png"></div>
+    <input type="number" name="resultat" placeholder="Resultat" value="<?=(isset($_SESSION['soustraction']) ? $_SESSION['soustraction'] : '')?>"></br></br>
+    <button class="btn btn-primary" type="submit" name="soustraction">Valider</button>
+</form>
+</div>
+
+<?php require_once "footer.php"
+?>

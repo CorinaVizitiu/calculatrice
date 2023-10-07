@@ -1,0 +1,53 @@
+<?php 
+session_start();
+if (!isset($_SESSION['count'])) {
+  $_SESSION['count'] = 0;}
+$title="Division";
+$nav="division";
+require_once "header.php";
+?>
+<?php
+if (!is_connected()) :
+   header('location: /MonSite/login.php');
+endif;
+
+?>
+
+
+    <?php
+    if (isset($_POST['nombre5']) && isset($_POST['nombre6'])) :
+      
+    $nombre5=$_POST['nombre5'];
+    $nombre6=$_POST['nombre6'];
+    $division=division($_POST['nombre5'],$_POST['nombre6']); 
+ 
+    $_SESSION['nombre5'] = $nombre5;
+    $_SESSION['nombre6'] = $nombre6;
+    $_SESSION['division'] = $division;
+    
+if (!is_numeric($_POST['nombre5']) || !is_numeric($_POST['nombre6'])): ?>
+   <div align="center"> Les deux entrées doivent être des nombres</div>
+  <?php elseif($_POST['nombre6'] == 0):?>
+  <div align="center"> Vous ne pouvez pas diviser par 0 </div>
+  <?php else :?>
+   <?php $division=division($_POST['nombre5'],$_POST['nombre6']); 
+   $_SESSION['count']++ ; ?>
+  
+<?php
+endif;
+ endif ;?>
+<?php $_SESSION['count']++; ?>
+<div align="center">
+<h1>Division</h1>
+
+<form action="/MONSITE/division.php" method="POST">
+    <input type="number" name="nombre5" placeholder="Entre le 1er nombre" value="<?=(isset($_POST['nombre5']) ? $_POST['nombre5'] : '')?> " ><br>
+    <div><img src="impartit.png"></div>
+    <input type="number" name="nombre6" placeholder="Entre le 2em nombre" value=" <?=(isset($_POST['nombre6']) ? $_POST['nombre6'] : '')?>"><br>
+  <div><img src="egal.png"></div>
+    <input type="number" name="resultat" placeholder="Resultat" value="<?=(isset($_SESSION['division']) ? $_SESSION['division'] : '')?>"></br></br>
+    <button class="btn btn-primary" type="submit" name="division">Valider</button>
+</form>
+</div>
+<?php require_once "footer.php"
+?>
